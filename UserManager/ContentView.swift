@@ -8,16 +8,75 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var users = [UUID: User]()
+    @State var path = NavigationPath()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack(path: $path) {
+            List {
+                ForEach(Array(users.values), id: \.self) { user in
+                    NavigationLink(value: user) {
+                        Image(.nopp)
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                            .clipShape(Circle())
+                        VStack(alignment: .leading) {
+                            Text(user.name)
+                            Group {
+                                Text("\(user.company), \(isUserActive(user))")
+                                Text("Age: \(user.age)")
+                            }
+                            .foregroundStyle(.secondary)
+                        }
+                    }
+                }
+            }
+            .navigationDestination(for: User.self) { user in
+                UserDetailView(user: user)
+            }
+            .task {
+                do {
+                    try await fetchUsers()
+                } catch {
+                    print(error)
+                }
+            }
+            .navigationTitle("Users")
         }
-        .padding()
+    }
+    
+    func fetchUsers() async throws{
+        guard users.isEmpty else {
+            print("The array is not empty")
+            return
+        }
+        guard let url = URL(string: "https://www.hackingwithswift.com/samples/friendface.json") else {
+            print("Invalid URL")
+            throw NetworkError.invalidURL
+        }
+        print("Starting a do-block")
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            print(data)
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+            let decoded = try decoder.decode([User].self, from: data)
+            print(decoded)
+            
+            for single in decoded {
+                print("Adding \(single.id)")
+                let id = single.id
+                let user = single
+                users[id] = user
+            }
+            
+        } catch {
+            print(error)
+        }
     }
 }
+
 
 #Preview {
     ContentView()

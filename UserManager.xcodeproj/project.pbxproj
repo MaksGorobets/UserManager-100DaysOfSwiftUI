@@ -11,6 +11,12 @@
 		E93AB1422B34A41D000A0C9A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93AB1412B34A41D000A0C9A /* ContentView.swift */; };
 		E93AB1442B34A41E000A0C9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E93AB1432B34A41E000A0C9A /* Assets.xcassets */; };
 		E93AB1472B34A41E000A0C9A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E93AB1462B34A41E000A0C9A /* Preview Assets.xcassets */; };
+		E93AB14E2B34A463000A0C9A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93AB14D2B34A463000A0C9A /* User.swift */; };
+		E93AB1502B34A735000A0C9A /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93AB14F2B34A735000A0C9A /* Error.swift */; };
+		E93AB1522B34B1C6000A0C9A /* UserDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93AB1512B34B1C6000A0C9A /* UserDetailView.swift */; };
+		E93AB1542B34B979000A0C9A /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93AB1532B34B979000A0C9A /* Tools.swift */; };
+		E93AB1562B34BA81000A0C9A /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93AB1552B34BA81000A0C9A /* FriendsView.swift */; };
+		E93AB1582B34C56D000A0C9A /* UserDecodedExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93AB1572B34C56D000A0C9A /* UserDecodedExample.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +25,12 @@
 		E93AB1412B34A41D000A0C9A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E93AB1432B34A41E000A0C9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E93AB1462B34A41E000A0C9A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E93AB14D2B34A463000A0C9A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		E93AB14F2B34A735000A0C9A /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		E93AB1512B34B1C6000A0C9A /* UserDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailView.swift; sourceTree = "<group>"; };
+		E93AB1532B34B979000A0C9A /* Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
+		E93AB1552B34BA81000A0C9A /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
+		E93AB1572B34C56D000A0C9A /* UserDecodedExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDecodedExample.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,7 +63,13 @@
 		E93AB13E2B34A41D000A0C9A /* UserManager */ = {
 			isa = PBXGroup;
 			children = (
+				E93AB1572B34C56D000A0C9A /* UserDecodedExample.swift */,
+				E93AB1532B34B979000A0C9A /* Tools.swift */,
+				E93AB14F2B34A735000A0C9A /* Error.swift */,
+				E93AB14D2B34A463000A0C9A /* User.swift */,
 				E93AB13F2B34A41D000A0C9A /* UserManagerApp.swift */,
+				E93AB1512B34B1C6000A0C9A /* UserDetailView.swift */,
+				E93AB1552B34BA81000A0C9A /* FriendsView.swift */,
 				E93AB1412B34A41D000A0C9A /* ContentView.swift */,
 				E93AB1432B34A41E000A0C9A /* Assets.xcassets */,
 				E93AB1452B34A41E000A0C9A /* Preview Content */,
@@ -137,8 +155,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E93AB1562B34BA81000A0C9A /* FriendsView.swift in Sources */,
+				E93AB1502B34A735000A0C9A /* Error.swift in Sources */,
 				E93AB1422B34A41D000A0C9A /* ContentView.swift in Sources */,
 				E93AB1402B34A41D000A0C9A /* UserManagerApp.swift in Sources */,
+				E93AB1542B34B979000A0C9A /* Tools.swift in Sources */,
+				E93AB1522B34B1C6000A0C9A /* UserDetailView.swift in Sources */,
+				E93AB1582B34C56D000A0C9A /* UserDecodedExample.swift in Sources */,
+				E93AB14E2B34A463000A0C9A /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
