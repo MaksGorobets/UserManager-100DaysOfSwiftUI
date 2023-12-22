@@ -11,29 +11,24 @@ struct ContentView: View {
     
     @State private var users = [UUID: User]()
     @State var path = NavigationPath()
+    @State private var showingAlert = false
+    @State private var alertMessage = ""
     
     var body: some View {
         NavigationStack(path: $path) {
             List {
                 ForEach(Array(users.values), id: \.self) { user in
                     NavigationLink(value: user) {
-                        Image(.nopp)
-                            .resizable()
-                            .frame(width: 50, height: 50)
-                            .clipShape(Circle())
-                        VStack(alignment: .leading) {
-                            Text(user.name)
-                            Group {
-                                Text("\(user.company), \(isUserActive(user))")
-                                Text("Age: \(user.age)")
-                            }
-                            .foregroundStyle(.secondary)
-                        }
+                        General(user: user)
                     }
                 }
             }
             .navigationDestination(for: User.self) { user in
-                UserDetailView(user: user)
+                UserDetailView(users: users, user: user, path: $path)
+            }
+            .alert("There was an error...", isPresented: $showingAlert) {
+                Text(alertMessage)
+                Button("OK") { }
             }
             .task {
                 do {
@@ -46,7 +41,7 @@ struct ContentView: View {
         }
     }
     
-    func fetchUsers() async throws{
+    func fetchUsers() async throws {
         guard users.isEmpty else {
             print("The array is not empty")
             return
@@ -59,6 +54,7 @@ struct ContentView: View {
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
             print(data)
+            
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
             let decoded = try decoder.decode([User].self, from: data)
@@ -72,7 +68,8 @@ struct ContentView: View {
             }
             
         } catch {
-            print(error)
+            alertMessage = error.localizedDescription
+            showingAlert = true
         }
     }
 }
