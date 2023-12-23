@@ -6,14 +6,16 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct UserDetailView: View {
     
-    let users: [UUID: User]
-    
     let user: User
+    let colors = [Color.orange, Color.green, Color.blue, Color.purple, Color.red]
     
     @Binding var path: NavigationPath
+    
+    var userDictionary: UserDictionary
     
     var body: some View {
         List {
@@ -25,7 +27,7 @@ struct UserDetailView: View {
                             Text(tag)
                                 .padding(10)
                                 .foregroundStyle(.white)
-                                .background(.blue)
+                                .background(LinearGradient(colors: [colors.randomElement() ?? .blue, .black], startPoint: .bottomLeading, endPoint: .topTrailing))
                                 .clipShape(RoundedRectangle(cornerRadius: 25.0))
                         }
                     }
@@ -42,8 +44,8 @@ struct UserDetailView: View {
             NavigationLink(value: user.friends) {
                 Text("Friends")
             }
-            .navigationDestination(for: [User.Friend].self) { friends in
-                FriendsView(friends: friends, users: users)
+            .navigationDestination(for: [Friend].self) { friends in
+                FriendsView(friends: friends, userDictionary: userDictionary)
             }
             .toolbar {
                 Button("Back to root") {
@@ -61,7 +63,7 @@ struct General: View {
     let user: User
     
     var body: some View {
-        HStack {
+        LazyHStack {
             Image(.nopp)
                 .resizable()
                 .frame(width: 50, height: 50)
@@ -75,11 +77,12 @@ struct General: View {
                 .foregroundStyle(.secondary)
             }
         }
+        .padding(.vertical)
     }
 }
 
 #Preview {
     let user = createUser()
     let path = NavigationPath()
-    return UserDetailView(users: [user.id : user], user: createUser(), path: .constant(path))
+    return UserDetailView(user: user, path: .constant(path), userDictionary: UserDictionary())
 }

@@ -6,11 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct FriendsView: View {
+    @Environment(\.modelContext) var modelContext
+    @Query var users: [User]
     
-    let friends: [User.Friend]
-    let users: [UUID: User]
+    let friends: [Friend]
+    var userDictionary: UserDictionary
     
     var body: some View {
         List(friends) { friend in
@@ -25,8 +28,8 @@ struct FriendsView: View {
         }
     }
     
-    func userForFriend(friend: User.Friend) -> User? {
-        guard let userFriend = users[friend.id] else { return nil }
+    func userForFriend(friend: Friend) -> User? {
+        guard let userFriend = userDictionary.dictionary[friend.id] else { return nil }
         return userFriend
     }
     
@@ -34,5 +37,5 @@ struct FriendsView: View {
 
 #Preview {
     let user = createUser()
-    return FriendsView(friends: [User.Friend(id: UUID(uuidString: "A706B8B7-7495-4FF8-BF75-679BA2AB2271") ?? UUID(), name: "Some guy")], users: [user.id : user])
+    return FriendsView(friends: user.friends, userDictionary: UserDictionary())
 }

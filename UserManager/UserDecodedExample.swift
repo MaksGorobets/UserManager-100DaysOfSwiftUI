@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftData
 
 func createUser() -> User {
     let user = """
@@ -81,4 +82,9 @@ func createUser() -> User {
     decoder.dateDecodingStrategy = .iso8601
     let userDecoded = try! decoder.decode(User.self, from: data)
     return userDecoded
+}
+
+func createFriends() -> [Friend] {
+    let user = createUser()
+    return user.friends
 }
